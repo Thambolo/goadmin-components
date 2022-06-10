@@ -171,7 +171,7 @@ var List = map[string]string{"login": `{{define "login"}}
             $.ajax({
                 dataType: 'json',
                 type: 'POST',
-                url: '{{.UrlPrefix}}/jwt',
+                url: '{{.UrlPrefix}}/signin',
                 async: 'true',
                 data: {
                     'username': $("#username").val(),
@@ -181,7 +181,7 @@ var List = map[string]string{"login": `{{define "login"}}
                     $.ajax({
                         dataType: 'json',
                         type: 'POST',
-                        url: '{{.UrlPrefix}}/signin',
+                        url: '{{.UrlPrefix}}/jwt',
                         async: 'true',
                         data: {
                             'username': $("#username").val(),

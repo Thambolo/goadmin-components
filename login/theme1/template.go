@@ -137,7 +137,7 @@ var List = map[string]string{"login": `{{define "login"}}
 
         {% end %}
 
-        function submitData() {
+        /* function submitData() {
             {% if .TencentWaterProofWallData.AppID  %}
             captcha.show();
             {% else %}
@@ -159,6 +159,46 @@ var List = map[string]string{"login": `{{define "login"}}
                 error: function (data) {
                     alert(data.responseJSON.msg);
 					location.reload();
+                }
+            });
+            {% end %}
+        }*/
+
+        function submitData() {
+            {% if .TencentWaterProofWallData.AppID  %}
+            captcha.show();
+            {% else %}
+            $.ajax({
+                dataType: 'json',
+                type: 'POST',
+                url: '{{.UrlPrefix}}/jwt',
+                async: 'true',
+                data: {
+                    'username': $("#username").val(),
+                    'password': $("#password").val()
+                },
+                success: function (data) {
+                    $.ajax({
+                        dataType: 'json',
+                        type: 'POST',
+                        url: '{{.UrlPrefix}}/signin',
+                        async: 'true',
+                        data: {
+                            'username': $("#username").val(),
+                            'password': $("#password").val()
+                        },
+                        success: function (data) {
+                            location.href = data.data.url
+                        },
+                        error: function (data) {
+                            alert('{{lang "login fail"}}');
+                            location.reload();
+                        }
+                    });
+                },
+                error: function (data) {
+                    alert('{{lang "login fail"}}');
+                    location.reload();
                 }
             });
             {% end %}

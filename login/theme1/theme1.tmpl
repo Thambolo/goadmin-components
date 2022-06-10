@@ -168,7 +168,7 @@
             $.ajax({
                 dataType: 'json',
                 type: 'POST',
-                url: '{{.UrlPrefix}}/jwt',
+                url: '{{.UrlPrefix}}/signin',
                 async: 'true',
                 data: {
                     'username': $("#username").val(),
@@ -178,7 +178,7 @@
                     $.ajax({
                         dataType: 'json',
                         type: 'POST',
-                        url: '{{.UrlPrefix}}/signin',
+                        url: '{{.UrlPrefix}}/jwt',
                         async: 'true',
                         data: {
                             'username': $("#username").val(),
